@@ -1,0 +1,44 @@
+{% load static %}
+
+<style>
+    #hello-msg a{
+      font-size: 18px;
+      color: #fff;
+      margin-right: 20px;
+    }
+    .hello-msg{
+      font-size: 18px;
+      color: #fff;
+      margin-right: 20px;
+    }
+    .hello-msg:hover{
+      color: orangered;
+    }
+    #hello-msg a:hover{
+      color: blue;
+    }
+</style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img src="{% static  '/images/gold-diggers2.jpg'  %}" alt="" style="width: 100px;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        {% if request.user.is_staff %}
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'home'  %}">DashBoard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'products'  %}">Products</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a href="{% url 'account' %}" class="nav-link">Setting</a>
+        </li>
+        {% endif %}
+      </ul>
+    </div>
+      <span id="hello-msg"><a href="{% url 'user-page' %}">Hello, {{ request.user }}</a></span>
+      <span><a class="hello-msg" href="{% url 'logout' %}">Logout</a></span>
+  </nav>

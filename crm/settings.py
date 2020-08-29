@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'accounts.apps.AccountsConfig',
+
+    'storages'
+
 ]
 
 MIDDLEWARE = [
@@ -81,13 +84,14 @@ WSGI_APPLICATION = 'crm.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'goal_diggers',
+        'USER': 'dhiraj',
+        'PASSWORD': 'DhirajTheBoss',
+        'HOST': 'database-1.ciroruhdv7rb.us-east-1.rds.amazonaws.com',
+        'PORT': '5432'
     }
 }
-import dj_database_url
-dj_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(dj_from_env)
 
 
 # Password validation
@@ -144,3 +148,12 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'resetyourpassmail@gmail.com'
 EMAIL_HOST_PASSWORD = 'dhiraj@22'
+
+
+AWS_S3_ENDPOINT_URL = 'vpce-06491f1faf08bd7b1'
+AWS_S3_REGION_NAME = 'us-east-1'
+AWS_STORAGE_BUCKET_NAME = 'goaldigger-bucket'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
